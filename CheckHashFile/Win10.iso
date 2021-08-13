@@ -1,0 +1,93 @@
+## Yêu cầu chung:
+- Môi trường (tùy chọn): Windows/Linux/OSX.
+- Ngôn ngữ: C++ (khuyến khích sử dụng C++11 trở lên).
+- Cho phép sử dụng thư viện ngoài.
+- Thời gian: 10 ngày làm việc (làm xong sớm có thể gởi sớm).
+- Quản lý mã nguồn bằng GITHUB.
+
+## Starter
+### Viết chương trình liệt kê danh sách tiến trình
+#### Tham số:
+- Không có
+#### Kết quả:
+```
+proclist
+|- System
+|--|- Interrupts
+|--|- smss.exe
+|- csrss.exe
+|- wininit.exe
+|--|- services.exe
+|--|--|- svchost.exe
+|--|--|--|- dllhost.exe
+|--|--|--|- RuntimeBroker.exe
+|--|--|- RuntimeBroker.exe
+|--|- svchost.exe
+|--|- svchost.exe
+|--|- svchost.exe
+|--|- explorer.exe
+|--|--|- excel.exe
+|--|--|- winword.exe
+|--|--|- cmd.exe
+|--|--|- chrome.exe
+|--|--|--|- chrome.exe
+|--|--|--|- chrome.exe
+|--|--|--|- chrome.exe
+|--|--|--|- chrome.exe
+|--|--|--|- chrome.exe
+|--|- firefox.exe
+|--|--|- firefox.exe
+|--|--|- firefox.exe
+|--|--|- firefox.exe
+|--|--|- firefox.exe
+|--|--|- firefox.exe
+```
+
+## Elementary
+### Viết ứng dụng kiểm tra tính toàn vẹn của tập tin
+#### Tham số:
+- file: tập tin cần kiểm tra.
+- --hash: giải thuật băm (MD5/SHA1/SHA256/SHA384/SHA512), mặc định: tính tất cả.
+```
+checkfile <file> --hash=<MD5/SHA1/SHA384/SHA256/SHA512>
+
+Ví dụ:
+checkfile win10.iso --hash=MD5
+```
+#### Kết quả:
+```
+---------- Trường hợp chỉ định thuật toán ----------
+checkfile Win10.iso --hash=SHA1
+Win10.iso
+- SHA1   : de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3
+
+---------- Trường hợp tính toàn bộ ----------
+checkfile Win10.iso
+Win10.iso
+- MD5    : 9e107d9d372bb6826bd81d3542a419d6
+- SHA1   : de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3
+- SHA256 : 299254b403cd330e173dc27ed54edfa552bfe9f83968330c4f8b24c3d563643f
+- SHA384 : 04392a0d276715bea3f8161eda91b1738df8229f7d2633bde211fff5e87bea9c5d66c8fa081f3ea075e4ad36677c7a11
+- SHA512 : 5d51c46401811bb444a6d0be94d228e7c19dda4830b3a2df14adbc01c1ab63eeef84390343630c745264672cd36fd4bc9c56d82eae92faf928ecdded416dbc4a
+```
+
+## Intermediate
+### Viết ứng dụng tải tập tin từ máy chủ web
+#### Tham số:
+- url: đường dẫn tập tin cần tải.
+- --connection-count: số lượng kết nối tối đa dùng để tải đồng thời, mặc định = 1.
+- --thread-count: số lượng luồng tối đa dùng để tải đồng thời, mặc định = 1.
+- --output: tập tin lưu trữ sau khi đã tải xong.
+```
+getfile <url> --connection-count=<n> --thread-count=<n> --output=<path/to/file>
+
+Ví dụ:
+getfiile https://microsoft.com/win10.iso --output=C:\Download\Win10.iso
+getfiile https://microsoft.com/win10.iso --connection-count=16 --thread-count=4 --output=C:\Download\Win10.iso
+```
+
+#### Yêu cầu:
+- Hỗ trợ tải qua giao thức an toàn HTTPS (nếu máy chủ hỗ trợ).
+- Hỗ trợ resume ở phiên tải tiếp theo trong trường hợp bị ngắt quãng.
+- Chỉ được tạo tối đa 1 tập tin tạm trong quá trình tải (vd: ngoài tập tin win10.iso thì được phép tạo thêm win10.iso.crdownload)
+
